@@ -14,6 +14,8 @@ from config import (
     REQUIRE_LRP,
     SDMMAC_PARAM,
     MASTER_KEY,
+    SDM_META_READ_KEY,
+    SDM_FILE_READ_KEY,
     UID_PARAM,
     DERIVE_MODE,
 )
@@ -220,8 +222,8 @@ def _internal_sdm(with_tt=False, force_json=False):
 
     try:
         res = decrypt_sun_message(param_mode=param_mode,
-                                  sdm_meta_read_key=derive_undiversified_key(MASTER_KEY, 1),
-                                  sdm_file_read_key=lambda uid: derive_tag_key(MASTER_KEY, uid, 2),
+                                  sdm_meta_read_key=SDM_META_READ_KEY,
+                                  sdm_file_read_key=SDM_FILE_READ_KEY,
                                   picc_enc_data=enc_picc_data_b,
                                   sdmmac=sdmmac_b,
                                   enc_file_data=enc_file_data_b)
