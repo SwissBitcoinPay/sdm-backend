@@ -192,7 +192,7 @@ def get_encryption_mode(picc_enc_data: bytes):
 # pylint: disable=too-many-arguments, too-many-locals
 def decrypt_sun_message(param_mode: ParamMode,
                         sdm_meta_read_key: bytes,
-                        sdm_file_read_key: Callable[[bytes], bytes],
+                        sdm_file_read_key: bytes,
                         picc_enc_data: bytes,
                         sdmmac: bytes,
                         enc_file_data: Optional[bytes] = None) -> dict:
@@ -253,7 +253,7 @@ def decrypt_sun_message(param_mode: ParamMode,
     if uid is None:
         raise InvalidMessage("UID cannot be None.")
 
-    file_key = sdm_file_read_key(uid)
+    file_key = sdm_file_read_key
 
     if sdmmac != calculate_sdmmac(param_mode,
                                   file_key,
