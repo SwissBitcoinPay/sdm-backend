@@ -238,7 +238,7 @@ def decrypt_sun_message(param_mode: ParamMode,
     # dont read the buffer any further if we don't recognize it
     if uid_length not in [0x07]:
         # fake SDMMAC calculation to avoid potential timing attacks
-        calculate_sdmmac(param_mode, sdm_file_read_key(b"\x00" * 7), b"\x00" * 10, enc_file_data, mode=mode)
+        calculate_sdmmac(param_mode, sdm_file_read_key, b"\x00" * 10, enc_file_data, mode=mode)
         raise InvalidMessage("Unsupported UID length")
 
     if uid_mirroring_en:
